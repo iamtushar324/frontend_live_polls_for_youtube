@@ -1,7 +1,7 @@
 import React from "react";
 import CreatePolls from "./containers/CreatePolls";
 
-const client_id = "1059529825547-2a9d05qrb62l58r79gtd6clkks48h3lo.apps.googleusercontent.com";
+const client_id = "1066575777882-vr6932qlv90h2tknvkkm2nil62nh878o.apps.googleusercontent.com";
 
 window.gapi.load("client:auth2", function () {
   window.gapi.auth2.init({
@@ -24,7 +24,7 @@ class App extends React.Component {
   };
 
   loadClient = () => {
-    window.gapi.client.setApiKey("AIzaSyCtfpv3z5o_834hmVRrqqAi_7f_hVw2QPg");
+    window.gapi.client.setApiKey("AIzaSyDeoDTN7XYXp_rCwj0Mwume2nbNP_cnM4c");
     return window.gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest").then(
       function () {
         console.log("GAPI client loaded for API");
@@ -138,12 +138,13 @@ class App extends React.Component {
             </button>
           </>
         )}
-        {this.state.items.length === 0 && <h1>No Live Stream Found</h1>}
+        {this.state.items.length === 0 && <h1 className="no">No Live Stream Found</h1>}
         {this.state.items.map((e, i) => {
           return (
-            <div key={i}>
+            <div className="stream_con" key={i}>
               <h1>{e.snippet.title}</h1>
-              <img src={e.snippet.thumbnails.default.url}></img>
+              <img src={e.snippet.thumbnails.medium.url}></img>
+			  <br/>
               {this.state.chatId !== e.snippet.liveChatId && (
                 <button
                   onClick={() => {
@@ -175,7 +176,9 @@ class App extends React.Component {
             </div>
           );
         })}
+			{this.state.chatId &&
         <CreatePolls items={this.state.ChatsData} />
+		}
       </div>
     );
   }

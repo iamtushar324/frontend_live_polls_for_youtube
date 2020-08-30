@@ -4,7 +4,7 @@ class CreatePolls extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "Poll Title",
+      title: "Poll Options",
       options: [],
       startTime: null,
       live: false,
@@ -54,15 +54,17 @@ class CreatePolls extends React.Component {
           Clear All Options
         </button>
         <input placeholder="Add Option" onKeyDown={this.addOption} />
+		<div className="options">
         {this.state.options.map(e => {
           return (
-            <>
+            <div className="op">
               {" "}
               <h1>{e.name}</h1>
               <h4>{e.count}</h4>{" "}
-            </>
+            </div>
           );
         })}
+			</div>
       </div>
     );
   }
